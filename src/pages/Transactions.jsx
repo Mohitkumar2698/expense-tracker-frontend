@@ -10,7 +10,7 @@ const Transactions = () => {
     <div
       className="
         min-h-[90vh]
-        p-4 space-y-6
+        p-2 sm:p-4 space-y-2 sm:space-y-4
         bg-gradient-to-br from-slate-100 via-white to-slate-200
         bg-[length:200%_200%]
         animate-[gradient_12s_ease_infinite]
@@ -18,7 +18,7 @@ const Transactions = () => {
     >
       {/* ACTION BAR */}
       <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-semibold text-gray-700">
+        <h2 className="text-2xl sm:text-3xl font-semibold text-gray-700">
           All Transactions
         </h2>
 
@@ -33,7 +33,10 @@ const Transactions = () => {
             cursor-pointer
           "
         >
-          <FaPlus /> Add Expense
+          <FaPlus /> <span className="hidden sm:block">
+            
+             Add Expense
+            </span>
         </button>
       </div>
 

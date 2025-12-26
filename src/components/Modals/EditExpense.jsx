@@ -1,16 +1,17 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { ExpenseContext } from "../../context/ExpenseContext";
 
-const AddExpanse = ({ setOpen }) => {
+const EditExpense = ({ setOpen, transaction }) => {
   const { dispatch } = useContext(ExpenseContext);
   const today = new Date().toISOString().split("T")[0];
 
   const [formData, setFormData] = useState({
-    amount: "",
-    category: "",
-    date: today,
-    note: "",
-    type: "",
+    id: transaction.id,
+    amount: transaction.amount || 0,
+    category: transaction.category || "",
+    date: transaction.date || today,
+    note: transaction.note || "",
+    type: transaction.type || "",
   });
 
   const handleChange = (e) => {
@@ -24,7 +25,7 @@ const AddExpanse = ({ setOpen }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({
-      type: "add",
+      type: "edit",
       payload: formData,
     });
     setOpen(false);
@@ -35,9 +36,11 @@ const AddExpanse = ({ setOpen }) => {
       <div className="bg-white w-full max-w-md rounded shadow-2xl px-4 py-2 space-y-2">
         {/* Header */}
         <div className="border-b pb-2">
-          <h1 className="text-2xl font-semibold text-gray-800">Add Expense</h1>
+          <h1 className="text-2xl font-semibold text-gray-800">
+            Update Expense
+          </h1>
           <p className="text-sm text-gray-500">
-            Enter details of your transaction
+            Enter details to update transaction
           </p>
         </div>
 
@@ -151,7 +154,7 @@ const AddExpanse = ({ setOpen }) => {
               type="submit"
               className="px-5 py-2 rounded bg-[#14213d] cursor-pointer text-white "
             >
-              Save
+              Update
             </button>
           </div>
         </form>
@@ -160,4 +163,4 @@ const AddExpanse = ({ setOpen }) => {
   );
 };
 
-export default AddExpanse;
+export default EditExpense;
